@@ -1,0 +1,6 @@
+rofi.combi-modi: window,drun,ssh
+rofi.modi: combi,run,window,ssh
+rofi.terminal: lxterminal
+rofi.show-icons: true
+rofi.theme: solarized
+rofi.theme: ~/.config/rofi/dmenu.rasi

@@ -173,10 +173,18 @@ hc unlock
     pids=( )
     # start the panel itself and remember its pid
 		tint2 &
-		nm-cli &
+    pids+=( $! )
+		nm-applet &
+    pids+=( $! )
 		nice dropbox &
+    pids+=( $! )
 		volumeicon &
+    pids+=( $! )
 		feh --bg-fill -z Pictures/wall &
+    pids+=( $! )
+		compton &
+    pids+=( $! )
+		light-locker &
     pids+=( $! )
     # or start another panel:
     # mypanel &

@@ -71,7 +71,7 @@ tag_keys=( {1..9} 0 )
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
     hc add "${tag_names[$i]}"
-		hc set_layout horizontal # Default to side by side tiling
+#		hc set_layout horizontal # Default to side by side tiling
     key="${tag_keys[$i]}"
     if ! [ -z "$key" ] ; then
         hc keybind "$Mod-$key" use_index "$i"
@@ -88,14 +88,9 @@ hc keybind $Mod-r remove
 hc keybind $Mod-s floating toggle
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-e pseudotile toggle
-# The following cycles through the available layouts within a frame, but skips
-# layouts, if the layout change wouldn't affect the actual window positions.
-# I.e. if there are two windows within a frame, the grid layout is skipped.
-hc keybind $Mod-space                                                           \
-            or , and . compare tags.focus.curframe_wcount = 2                   \
-                     . cycle_layout +1 horizontal vertical max grid    \
-               , cycle_layout +1
 
+# The following cycles through the available layouts within a frame.
+hc keybind $Mod-space cycle_layout +1 horizontal vertical max grid 
 # mouse
 hc mouseunbind --all
 hc mousebind $Mod-Button1 move
@@ -135,14 +130,14 @@ hc set frame_gap 0
 hc attr theme.active.color '#00ed00'
 hc attr theme.normal.color '#454545'
 hc attr theme.urgent.color orange
-hc attr theme.inner_width 0
+hc attr theme.inner_width 1
 hc attr theme.inner_color black
-hc attr theme.border_width 2
+hc attr theme.border_width 1
 hc attr theme.floating.border_width 1
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.outer_color black
-hc attr theme.active.inner_color '#3E4A00'
-hc attr theme.active.outer_color '#3E4A00'
+hc attr theme.active.inner_color '#0000ed'
+hc attr theme.active.outer_color '#0000ed'
 hc attr theme.background_color '#141414'
 
 hc set window_gap 0
@@ -208,8 +203,10 @@ autolaunch=~/.config/herbstluftwm/autolaunch.sh
 hc_exec()  { hc spawn ~/.config/herbstluftwm/exec_on_tag.sh "$@" ;} 
 if hc silent new_attr bool my_autolaunch_inhibitor; then
 	#hc spawn "$autolaunch" &
+	sleep 1
 	hc_exec 1 google-chrome-stable &
 	hc_exec 2 firefox &
+	sleep 0.5
 	hc_exec 3 lxterminal --geometry=85x50 &
 	hc_exec 3 lxterminal --geometry=85x50 &
 	hc_exec 4 thunderbird &

@@ -1,0 +1,3 @@
+#OLD#win=$(xdotool getwindowfocus);eval $(xdotool getwindowgeometry --shell $win); xdotool mousemove --window $win $[WIDTH/2] $[HEIGHT/2]; sleep 0.5; xdotool click 1; xdotool mousemove --window $win $[WIDTH/2] -13;
+## Left clicks once in the center of the focused window and moves cursor to window's top left corner
+xdotool getwindowfocus mousemove -w %1 --sync --polar 0 0 sleep 0.5 click 1 mousemove -w %1 2 2

@@ -1,0 +1,4 @@
+Server = https://ftp.acc.umu.se/mirror/archlinux/$repo/os/$arch
+Server = https://ftp.myrveln.se/pub/linux/archlinux/$repo/os/$arch
+Server = http://arch.mirror.far.fi/$repo/os/$arch
+Server = http://mirror.puzzle.ch/archlinux/$repo/os/$arch

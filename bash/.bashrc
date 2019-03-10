@@ -77,3 +77,4 @@ export LESS_TERMCAP_se=$'\e[0m' # end standout-mode first and last row backgroun
 export LESS_TERMCAP_us=$'\e[0;32m' # begin underline "variables"
 export LESS_TERMCAP_ue=$'\e[0m'    # end underline background
 
+export BAT_THEME="Monokai Extended Origin"

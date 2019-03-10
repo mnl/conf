@@ -211,8 +211,8 @@ if hc silent new_attr bool my_autolaunch_inhibitor; then
 	hc rule once --class="Firefox" --maxage=10 tag=2
 	hc_exec 2 firefox &
 	hc rule once --class="termite" --maxage=10 tag=3
-	hc_exec 3 termite
-	hc_exec 3 termite
+	hc_exec 3 termite &
+	hc_exec 3 termite &
 	hc_exec 4 thunderbird &
 	hc_exec 5 thunar &
 fi

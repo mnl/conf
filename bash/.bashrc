@@ -38,10 +38,42 @@ export BROWSER=/usr/bin/firefox
 export EDITOR=vim
 export PAGER=less
 export IGNOREEOF=3
+#export TERM=xterm-256color # To avoid termcap problem
+alias ssh='TERM=xterm-256color ssh'
+
+# > can't overwrite ( >| overrides )
+set -o noclobber
 
 # completion
 shopt -s cdspell
 shopt -s direxpand dirspell
 
+# Set up default XDG directories
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+# XDG fixes
+export ATOM_HOME="$XDG_DATA_HOME"/atom
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export LESSHISTFILE="$XDG_CACHE_HOME"/lesshst
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
+export _Z_DATA=$XDG_CACHE_HOME/z/cache
+
 # Use z frequency jumper
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+# Open new terms in current working directory
+[[ -r "/etc/profile.d/vte.sh" ]] && source /etc/profile.d/vte.sh
+
+# Add colors to less when displaying manpages
+export LESS_TERMCAP_md=$'\e[1;35m' # begin bold - syntax and keywords
+export LESS_TERMCAP_me=$'\e[0m' # end mode - some rows
+export LESS_TERMCAP_so=$'\e[0;43;30m' # begin standout-mode -- statusbar and searchhighlights
+export LESS_TERMCAP_se=$'\e[0m' # end standout-mode first and last row background
+export LESS_TERMCAP_us=$'\e[0;32m' # begin underline "variables"
+export LESS_TERMCAP_ue=$'\e[0m'    # end underline background
+

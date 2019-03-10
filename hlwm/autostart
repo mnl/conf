@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # this is a simple config for herbstluftwm
-TERMINAL=lxterminal
+TERMINAL=termite
 
 hc() {
     herbstclient "$@"
@@ -63,6 +63,9 @@ hc keybind $Mod-Control-Left    resize left +$resizestep
 hc keybind $Mod-Control-Down    resize down +$resizestep
 hc keybind $Mod-Control-Up      resize up +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
+
+# set layout horizontal (side by side)
+hc set default_frame_layout 1 
 
 # tags
 tag_names=( {1..9} )
@@ -146,10 +149,10 @@ hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
 hc set mouse_recenter_gap 0
 
+hlwm_tools=$HOME/.config/herbstluftwm
 # mickes additions
-hc keybind $Mod-p spawn dmenu_run_hlwm
-#hc keybind $Mod-i spawn rofi_run_hlwm
-hc keybind $Mod-c spawn $HOME/sh/hlwm/centerclick.sh
+hc keybind $Mod-p spawn $hlwm_tools/dmenu2_hlwm
+hc keybind $Mod-c spawn $hlwm_tools/centerclick
 
 # rules
 hc unrule -F
@@ -188,27 +191,28 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 hc detect_monitors
 
 # find the panel
-panel=~/.config/herbstluftwm/panel.sh
-[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+#panel=~/.config/herbstluftwm/panel.sh
+#[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
+#for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
-    "$panel" $monitor &
-done
+#    "$panel" $monitor &
+#done
 # reserve some space for the panel on monitor 0 & 1
-hc pad 0 "" "" 16
-hc pad 1 "" "" 16
+hc pad 0 0 0 20
+hc pad 1 0 0 20
 
 # Autolaunch programs
 autolaunch=~/.config/herbstluftwm/autolaunch.sh
 hc_exec()  { hc spawn ~/.config/herbstluftwm/exec_on_tag.sh "$@" ;} 
 if hc silent new_attr bool my_autolaunch_inhibitor; then
 	#hc spawn "$autolaunch" &
-	sleep 1
+	hc rule once --class="google-chrome" --maxage=10 tag=1
 	hc_exec 1 google-chrome-stable &
+	hc rule once --class="Firefox" --maxage=10 tag=2
 	hc_exec 2 firefox &
-	sleep 0.5
-	hc_exec 3 lxterminal --geometry=85x50 &
-	hc_exec 3 lxterminal --geometry=85x50 &
+	hc rule once --class="termite" --maxage=10 tag=3
+	hc_exec 3 termite
+	hc_exec 3 termite
 	hc_exec 4 thunderbird &
 	hc_exec 5 thunar &
 fi

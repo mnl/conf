@@ -30,7 +30,8 @@ alias tracert='traceroute'
 alias rot13='tr N-ZA-Mn-za-m A-Za-z'
 alias jarva='java -jar'
 alias castv="castnow --tomp4 --ffmpeg-vcodec copy"
-alias wget="wget -c"
+alias wget="wget --continue"
+alias ip="ip --color=auto"
 
 # dmesg with colored human-readable dates
 alias dmesgc="dmesg -T | sed -e 's|\(^.*'`date +%Y`']\)\(.*\)|\x1b[0;34m\1\x1b[0m - \2|g'"
@@ -93,7 +94,7 @@ xpdf() { command xpdf "$@" & }
 vlc() { command vlc "$@" & }
 gvim() { command gvim "$@" & }
 thunar() { command thunar "$@" & }
-mecp() { scp "$@" ${SSH_CLIENT%% *}:Desktop/; }
+mecp() { scp -P ${SSH_CLIENT##* } "$1" ${SSH_CLIENT%% *}:${2-.}; }
 
 # Useless functions :P
 # matrix simulator

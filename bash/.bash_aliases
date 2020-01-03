@@ -21,16 +21,16 @@ alias l='ls -CF'
 alias du='du -kh'       # Makes a more readable output.
 alias df='df -kTh'
 alias cdt='cd $(mktemp -d -t XXXX-tmp)'
-alias hc='herbstclient'
-alias sc='systemctl'
+alias hc='herbstclient '
+alias sc='systemctl '
 alias fx='less -FXR' #make less look like cat but with raw ansi
 alias lsl='ls -lhFA | fx'
 alias xcp='xclip -selection clipboard'
 alias tracert='traceroute'
 alias rot13='tr N-ZA-Mn-za-m A-Za-z'
-alias jarva='java -jar'
+alias jarva='nice java -jar'
 alias castv="castnow --tomp4 --ffmpeg-vcodec copy"
-alias wget="wget --continue"
+alias wget="wget --continue "
 alias ip="ip --color=auto"
 
 # dmesg with colored human-readable dates
@@ -53,7 +53,7 @@ alias sumlf="awk '/^[0-9,.]{1,}$/ { s += \$0 } END { printf \"%f\", s}'"
 # show ip on network cards ( mostly like 'ip ro' )
 alias ipa="ip -o -4 a | awk 'NR>1 { sub(/\/.*/,\"\",\$4);print \$4,\"on\",\$2 }'"
 # external ip checker
-alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip="dig +short +timeout=1 myip.opendns.com @resolver1.opendns.com"
 
 # Neat functions
 # myip() { curl -s checkip.dyndns.org|grep -o '[0-9.]\{7,15\}'; }
@@ -73,6 +73,8 @@ cdm() { mkdir -p "$1" && cd "$1"; }
 gv() { grep -v -e "${1:-^#}" -e "^\$"; }
 # watch a a file for changes
 fwatch() { while true; do cat "${1:-.}" || break; date "+%nStarting %F %T."; inotifywait -e modify "$1"; done; }
+# List directories only
+lsdir() { ls --classify --group-directories-first -1 "$@" | grep '/$' | column; }
 
 # Arch specific aliases:
 # prefer powerpill for package management

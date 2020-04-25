@@ -33,6 +33,12 @@ alias castv="castnow --tomp4 --ffmpeg-vcodec copy"
 alias wget="wget --continue "
 alias ip="ip --color=auto"
 
+# completion for aliases
+_completion_loader herbstclient
+complete -o nospace -F _herbstclient_complete hc
+_completion_loader systemctl
+complete -F _systemctl sc
+
 # dmesg with colored human-readable dates
 alias dmesgc="dmesg -T | sed -e 's|\(^.*'`date +%Y`']\)\(.*\)|\x1b[0;34m\1\x1b[0m - \2|g'"
 alias dmesg="dmesg -HP"
@@ -78,7 +84,7 @@ lsdir() { ls --classify --group-directories-first -1 "$@" | grep '/$' | column; 
 
 # Arch specific aliases:
 # prefer powerpill for package management
-type -p powerpill > /dev/null && alias p='sudo powerpill' || alias p='sudo pacman'
+type -p yay > /dev/null && alias p='yay --repo' || alias p='sudo pacman'
 # check which package something belongs to
 alias powns='pacman -Qo'
 # show executables in package

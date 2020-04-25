@@ -6,7 +6,10 @@ set colored-stats on
 set colored-completion-prefix on
 set blink-matching-paren on
 set show-all-if-ambiguous on
-set visible-stats
+set visible-stats on
+set skip-completed-text on
+set mark-symlinked-directories on
+set match-hidden-files off
 
 # vi mode
 set editing-mode vi

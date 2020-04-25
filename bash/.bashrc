@@ -1,5 +1,5 @@
 # Mickes .bashrc
-# Updated on lör mar 23 13:52:27 CET 2019
+# Updated on mån okt 14 22:29:08 CEST 2019
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -89,4 +89,8 @@ export LESS_TERMCAP_us=$'\e[0;32m' # begin underline "variables"
 export LESS_TERMCAP_ue=$'\e[0m'    # end underline background
 
 export BAT_THEME="Monokai Extended Origin"
+
 export GPG_TTY=$(tty)
+
+# Prevent GTK accessibility stuff from running
+export NO_AT_BRIDGE=1

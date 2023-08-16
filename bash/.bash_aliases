@@ -62,6 +62,11 @@ alias ipa="ip -o -4 a | awk 'NR>1 { sub(/\/.*/,\"\",\$4);print \$4,\"on\",\$2 }'
 alias myip="dig +short +timeout=1 myip.opendns.com @resolver1.opendns.com"
 
 # Neat functions
+myipr() {
+	myip=$(dig +short +timeout=1 myip.opendns.com @resolver1.opendns.com || \
+		(echo "Lookup Failed" 1>&2; exit 1))
+	dig +short -x $myip
+}
 # myip() { curl -s checkip.dyndns.org|grep -o '[0-9.]\{7,15\}'; }
 # colored diff output. $1 = red, $2 = green
 cdiff() { diff -U3 $1 $2 |sed -e 's/^+/\x1b\[32m /;s/^-/\x1b[31m /;s/$/\x1b[0m/'; }
@@ -142,3 +147,6 @@ extract() {
     fi
 fi
 }
+chsame() { chmod --reference=$1 $2; chown --reference=$1 $2; }
+
+urldecode='python3 -c "import sys, urllib; print(urllib.parse.unquote(sys.stdin.read()))"'
